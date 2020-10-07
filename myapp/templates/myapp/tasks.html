@@ -1,0 +1,66 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-info text-white text-center">PRIORITY</div>
+            <div class="card-body" data-type="priority">
+                <ul class="list-group">
+                    {% for task in tasks %}
+                    {% if task.is_priority %}
+                    <li class="list-group-item" draggable="true" data-id="{{task.id}}">
+                        {{task.title}}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white text-center">IN PROGRESS</div>
+            <div class="card-body" data-type="progress">
+                <ul class="list-group">
+                    {% for task in tasks %}
+                    {% if task.is_progress %}
+                    <li class="list-group-item" draggable="true" data-id="{{task.id}}">
+                        {{task.title}}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-success text-white text-center">COMPLETE</div>
+            <div class="card-body" data-type="complete">
+                <ul class="list-group">
+                    {% for task in tasks %}
+                    {% if task.is_complete %}
+                    <li class="list-group-item" draggable="true" data-id="{{task.id}}">
+                        {{task.title}}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <ul class="list-group">
+            {% for per in permissions %}
+            <li class="list-group-item">{{per.name}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% block script %}
+<script src="{% static 'js/dragdrop.js' %}"></script>
+{% endblock %}
+{% endblock %}
